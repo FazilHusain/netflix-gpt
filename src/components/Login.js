@@ -7,12 +7,11 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "../utills/firebase";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utills/userSlice";
+import { BG_URL, USER_AVATAR } from "../utills/constants";
 
 const Login = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errMessage, setErrMessage] = useState(null);
@@ -39,15 +38,14 @@ const Login = () => {
           const user = userCredential.user;
           updateProfile(user, {
             displayName: name.current.value,
-            photoURL: "",
+            photoURL: USER_AVATAR,
           })
             .then(() => {
               // Profile updated!
-              const { uid, email, displayName } = auth.currentUser;
+              const { uid, email, displayName, photoURL } = auth.currentUser;
               dispatch(
-                addUser({ uid: uid, email: email, displayName: displayName })
-              );
-              navigate("/browse");
+                addUser({ uid: uid, email: email, displayName: displayName, photoURL:photoURL })
+              );          
             })
             .catch((error) => {
               // An error occurred
@@ -69,7 +67,6 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          navigate("/browse");
           // ...
         })
         .catch((error) => {
@@ -89,7 +86,8 @@ const Login = () => {
       <Header />
       <div className="absolute">
         <img
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/fc164b4b-f085-44ee-bb7f-ec7df8539eff/d23a1608-7d90-4da1-93d6-bae2fe60a69b/IN-en-20230814-popsignuptwoweeks-perspective_alpha_website_large.jpg"
+        className="w-screen"
+          src={BG_URL}
           alt="logo"
         />
       </div>
