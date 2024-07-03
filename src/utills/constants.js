@@ -7,7 +7,7 @@ export const USER_AVATAR =
     method: "GET",
     headers: {
         accept: 'application/json',
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmNTQ1MWUxMTM1NjBkYTA3MzgyNWQyYWMwMjk1MTUwNSIsIm5iZiI6MTcxOTgxOTkwNy44NjIzMjcsInN1YiI6IjY2ODI1YzQwZDYwYzJlODQwOTlkZDRjYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.XgFW8CxYfzCKXJ7cCYxrARuJMGORxwfAHgBw7ntNvao'
+        Authorization: 'Bearer ' + process.env.REACT_APP_TMDB_KEY,
       }
   };
   
@@ -20,3 +20,5 @@ export const USER_AVATAR =
     { identifier: "hindi", name: "Hindi" },
     { identifier: "spanish", name: "Spanish" },
   ];
+
+  export const OPENAI_KEY = "" ;
